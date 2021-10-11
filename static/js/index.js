@@ -69,5 +69,9 @@ function actualUser(){
 
 }
 
-
+window.addEventListener('DOMContentLoaded', (event) => {
+    if (localStorage.getItem('actualUser') === null){
+        window.location.replace("/login");
+    }
+});
 

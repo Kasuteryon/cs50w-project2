@@ -1,8 +1,45 @@
-body { margin: 0; padding-bottom: 3rem; }
-#new-task { background: rgba(0, 0, 0, 0.15); padding: 0.25rem; position: fixed; bottom: 0; left: 4.9rem; right: 0; display: flex; height: 3rem; box-sizing: border-box; backdrop-filter: blur(10px); }
-#task { border: none; padding: 0 1rem; flex-grow: 1; border-radius: 2rem; margin: 0.25rem; }
-#task:focus { outline: none; }
-#new-task > button { background: #333; border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: #fff; }
+$gradient-blue: linear-gradient(to right, #330099,#3300CC, #3300FF, #3399FF);
+
+$gradient-pink: linear-gradient(to right, #FF3333, #FF3366, #FF3399, #FF66FF);
+
+$gradient-green: linear-gradient(to right, #006600 ,#339933, #00CC66);
+
+$gradient-orange: linear-gradient(to right, #FF6633, #FF9933);
+
+body { 
+    margin: 0; 
+    padding-bottom: 3rem; 
+}
+#new-task { 
+    background: rgba(0, 0, 0, 0.15); 
+    padding: 0.25rem; position: fixed; 
+    bottom: 0; 
+    left: 4.9rem; 
+    right: 0; 
+    display: flex; 
+    height: 3rem; 
+    box-sizing: border-box; 
+    backdrop-filter: blur(10px); 
+}
+#task { 
+    border: none; 
+    padding: 0 1rem; 
+    flex-grow: 1; 
+    border-radius: 2rem; 
+    margin: 0.25rem; 
+}
+#task:focus 
+{ outline: none; 
+}
+#new-task > button { 
+    background: $gradient-orange; 
+    border: none; 
+    padding: 0 1rem; 
+    margin: 0.25rem; 
+    border-radius: 2rem; 
+    outline: none; 
+    color: #fff; 
+}
 
 /*#tasks { list-style-type: none; margin: 0; padding: 0; }
 #tasks > li { padding: 0.5rem 1rem; }
@@ -22,4 +59,9 @@ body { margin: 0; padding-bottom: 3rem; }
 
 .bg-secondary{
     background-color: #11101D !important;
+}
+
+.bg-success{
+    background-color: none;
+    background: $gradient-orange !important;
 }

@@ -35,11 +35,12 @@ body {
 }
 
 #new-task > button {
-  background: #333;
+  background: -webkit-gradient(linear, left top, right top, from(#FF6633), to(#FF9933));
+  background: linear-gradient(to right, #FF6633, #FF9933);
   border: none;
   padding: 0 1rem;
   margin: 0.25rem;
-  border-radius: 3px;
+  border-radius: 2rem;
   outline: none;
   color: #fff;
 }
@@ -60,5 +61,11 @@ body {
 
 .bg-secondary {
   background-color: #11101D !important;
+}
+
+.bg-success {
+  background-color: none;
+  background: -webkit-gradient(linear, left top, right top, from(#FF6633), to(#FF9933)) !important;
+  background: linear-gradient(to right, #FF6633, #FF9933) !important;
 }
 /*# sourceMappingURL=chat-styles.css.map */
