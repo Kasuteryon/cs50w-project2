@@ -4,7 +4,7 @@
 <div>
     <nav class="navbar navbar-dark bg-dark fixed-top">
         <div class="container-fluid justify-content-md-center">
-            <span class="navbar-brand mb-0 h1 text-center ">General <box-icon name='home' animation='fade-left' ></box-icon></span>
+            <span class="navbar-brand mb-0 h1 text-center ">General <i class='bx bx-home bx-tada' ></i></span>
         </div>
       </nav>
     <ul id="tasks">
@@ -13,7 +13,9 @@
     </ul>
     <form id="new-task" onsubmit="return false;">
         <input id="task" autocomplete="off" autofocus placeholder="Escribe algo" type="text">
-        <button id="submit" type="submit" onclick="sendMessage()">Enviar <i class='bx bx-send bx-burst bx-flip-vertical' ></i></button>
+        <button id="submit" type="submit" onclick="sendMessage()"><i class='bx bx-send bx-spin-hover'></i></button>
     </form>
 </div>
+
+
 {% endblock %} 
