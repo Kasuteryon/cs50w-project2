@@ -8,6 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
     <link rel="stylesheet" href="../static/css/login-style.css">
+    
 </head>
 
 <body>			
@@ -27,16 +28,16 @@
 												<h4 class="mb-4 pb-3">Iniciar Sesión</h4>
 												
 												<div class="form-group">
-													<input required type="email" name="logemail" 
+													<input required type="text" name="loguser" 
 													class="form-style" 
-													placeholder="Cuenta" 
+													placeholder="Usuario" 
 													id="logemail" 
 													autocomplete="none">
 													<i class="input-icon uil uil-at"></i>
 												</div>	
 												
 												<div class="d-grid gap-2">
-													<button name="login" value="login" class="btn mt-4">Entrar</button>
+													<button name="login" value="login" class="btn mt-4" onclick="actualUser()">¡Textiemos!</button>
 												</div>
 												
 												
@@ -109,6 +110,6 @@
     
       </footer>
 	
-	<script src="../static/js/animations.js"></script>
+  <script src="../static/js/index.js"></script>
 </body>
 </html>

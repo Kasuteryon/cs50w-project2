@@ -143,6 +143,10 @@
   transition: all 0.4s ease;
   background: #11101D;
 }
+
+ol, ul{
+  padding-left: 0 !important;
+}
 .sidebar li a:hover{
   background: #FFF;
 }

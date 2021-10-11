@@ -2,16 +2,14 @@
 
 {% block main %}
 <div>
-    <h1>Mi primer app con socketio</h1>
-    <p>Ejemplo Basico</p>
-    
-    
-    <h1>Tasks</h1>
-        <ul id="tasks">
-        </ul>
-        <form id="new-task" onsubmit="return false;">
-            <input id="task" autocomplete="off" autofocus placeholder="Escribe algo" type="text">
-            <button id="submit" type="submit" onclick="sendMessage()">Enviar</button>
-        </form>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">Chat general</nav>
+    <ul id="tasks">
+        <li></li>
+        <li></li>
+    </ul>
+    <form id="new-task" onsubmit="return false;">
+        <input id="task" autocomplete="off" autofocus placeholder="Escribe algo" type="text">
+        <button id="submit" type="submit" onclick="sendMessage()">Enviar</button>
+    </form>
 </div>
 {% endblock %} 

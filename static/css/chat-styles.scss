@@ -4,6 +4,22 @@ body { margin: 0; padding-bottom: 3rem; }
 #task:focus { outline: none; }
 #new-task > button { background: #333; border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: #fff; }
 
-#tasks { list-style-type: none; margin: 0; padding: 0; }
+/*#tasks { list-style-type: none; margin: 0; padding: 0; }
 #tasks > li { padding: 0.5rem 1rem; }
-#tasks > li:nth-child(odd) { background: #efefef; }
+#tasks > li:nth-child(odd) { background: #efefef; } */
+
+.fixed-top{
+    position: fixed !important;
+    left: 4.9rem !important;
+}
+
+.card{
+    border-radius: 20px !important;
+    margin: 20px !important;
+    border: none;
+    //width: 220px;
+}
+
+.bg-secondary{
+    background-color: #11101D !important;
+}
