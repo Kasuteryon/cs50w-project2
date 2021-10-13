@@ -6,13 +6,18 @@ function sendMessage(){
     let hoy = new Date();
     //let fecha = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getFullYear() + '-'+ hoy.getHours() + ':' + hoy.getMinutes();
     let fecha = hoy.getHours() + ':' + hoy.getMinutes();
-    console.log(fecha.toString());
+    //console.log(fecha.toString());
     var user = localStorage.getItem('actualUser');
     
+    let dict =  {'user':user,'selection': task.value, 'dateM': fecha.toString(), 'roomM': localStorage.getItem('room')};
+    
+    
     if (task.value) {
-        socket.emit("message", {'user':user,'selection': task.value, 'dateM': fecha.toString()});
+        socket.emit("message", dict);
         task.value = '';
-      }
+    }
+
+    
     return false;
     
 }
@@ -62,10 +67,16 @@ socket.on('announce message', data => {
     window.scrollTo(0, document.body.scrollHeight);
 }); 
 
+function joinRoom(data){
+    localStorage.setItem("room", data);
+    socket.emit("join", {'username': localStorage.getItem('actualUser'), 'room':data})
+}
+
 function actualUser(){
     actualUser = document.getElementById('logemail').value;
 
     localStorage.setItem('actualUser', actualUser);
+    localStorage.setItem('room', 'general');
 
 }
 
@@ -73,12 +84,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
     if (localStorage.getItem('actualUser') === null){
         window.location.replace("/login");
     }
-
+    joinRoom(localStorage.getItem('room'));
 });
 
 function logOut(){
     localStorage.removeItem('actualUser');
 }
-
-
 

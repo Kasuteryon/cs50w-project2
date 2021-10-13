@@ -33,8 +33,9 @@ def send_message(data):
     selection = data["selection"]
     dateM = data["dateM"]
     user = data["user"]
+    roomM = data["roomM"]
     # print(selection)
-    emit("announce message", {"user":user,"selection": selection, "dateM": dateM}, broadcast=True)
+    emit("announce message", {"user":user,"selection": selection, "dateM": dateM}, room=roomM)
 
 @socketio.on('join')
 def on_join(data):
