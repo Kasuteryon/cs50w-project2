@@ -23,6 +23,10 @@ function sendMessage(){
 }
 
 socket.on('announce message', data => {
+    printMessages(data);
+}); 
+
+function printMessages(data){
     const li = document.createElement('div');
     const row = document.createElement('div');
     const colOwn = document.createElement('div');
@@ -65,7 +69,7 @@ socket.on('announce message', data => {
         colOther.append(li);
     }
     window.scrollTo(0, document.body.scrollHeight);
-}); 
+}
 
 function joinRoom(data){
     localStorage.setItem("room", data);
@@ -73,10 +77,42 @@ function joinRoom(data){
 }
 
 function actualUser(){
-    actualUser = document.getElementById('logemail').value;
-
+    actualUser = document.getElementById('loguser').value;
     localStorage.setItem('actualUser', actualUser);
     localStorage.setItem('room', 'general');
+    /* Form
+    let form = new FormData();
+
+    form.append('user', usuario);
+    // Objeto tequest
+    let request = new XMLHttpRequest();
+
+    request.open("POST", "/login");
+
+    // Enviar datos
+    request.send(form);
+
+    // ---------------
+    request.onreadystatechange = function(){
+        if (request.readyState == 4){
+            // Cuando el servidor responde
+            let codigoRespuesta = request.status;
+            if (codigoRespuesta == 200){
+                let info = request.responseText;
+                alert(info);
+
+                localStorage.setItem('actualUser', actualUser);
+                localStorage.setItem('room', 'general');
+
+                window.location = "/";
+            }else{
+                let info = request.responseText;
+                alert(info);
+                return false;
+            }
+        }
+    }*/
+    
 
 }
 
@@ -85,6 +121,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
         window.location.replace("/login");
     }
     joinRoom(localStorage.getItem('room'));
+    userSpan = document.getElementById('userSpan');
+    userSpan.innerHTML = 'Soy ' + localStorage.getItem('actualUser')
 });
 
 function logOut(){

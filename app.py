@@ -4,7 +4,9 @@ from flask import Flask, render_template, request
 from flask_session import Session
 from flask_socketio import SocketIO, emit, send, join_room, leave_room
 from werkzeug.utils import redirect
+import json
 
+users = []
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
@@ -23,8 +25,47 @@ def index():
 def login():
 
     if request.method == 'POST':
-        request.form.get("userlog")
-        return redirect("/");
+        user = request.form.get("loguser")
+        pas = request.form.get("logpass")
+
+        with open('./users.json', "r") as file:
+            data = json.load(file)
+
+        for userF in data['users']:
+            if userF["username"] == user and userF["password"] == pas:
+                return redirect("/")
+              
+
+    return render_template("login.html")
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+
+    if request.method == 'POST':
+        user = request.form.get("loguser2")
+        pas = request.form.get("logpass2")
+
+        with open('./users.json', "r") as file:
+            data = json.load(file)
+
+        users = []
+        for userF in data['users']:
+            users.append(userF['username'])
+
+        if user in users:
+            return "Usuario no Disponible", 403
+        else:
+            newUser = {
+                "username": user,
+                "password": pas
+            }
+
+            data['users'].append(newUser)
+
+            with open('./users.json', "w") as file:
+                json.dump(data, file)
+
+        return redirect("/login")
 
     return render_template("login.html")
 
