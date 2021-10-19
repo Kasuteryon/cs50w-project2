@@ -50,8 +50,12 @@ function printMessages(data){
     message.innerHTML = `${data.selection}`;
 
     row.classList.add('row');
-    colOwn.classList.add('col-6');
-    colOther.classList.add('col-6');
+    colOwn.classList.add('col-lg-6');
+    colOwn.classList.add('col-md-6');
+    colOwn.classList.add('col-sm-12');
+    colOther.classList.add('col-lg-6');
+    colOther.classList.add('col-md-6');
+    colOther.classList.add('col-sm-12');
 
     if (data.user == localStorage.getItem('actualUser')){
         document.querySelector('#tasks').append(row);
@@ -151,6 +155,7 @@ function addChannel(){
         a.append(i, span1);
 
         span2.classList.add('tooltip');
+        span2.innerHTML = input.value;
 
         li.append(a, span2);
 

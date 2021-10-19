@@ -17,5 +17,17 @@
             "username": "Elaine", 
             "password": "1"
         }
+    ],
+"channels":
+    [ 
+        {
+            "name": "Holos",
+            "createdBy": "Eduardo"
+        },
+        {
+            "name": "Los newbies",
+            "createdBy": "Sigrid"
+        }
+
     ]
 }

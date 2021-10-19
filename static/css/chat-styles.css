@@ -75,4 +75,8 @@ body {
   background: -webkit-gradient(linear, left top, right top, from(#FF6633), to(#FF9933)) !important;
   background: linear-gradient(to right, #FF6633, #FF9933) !important;
 }
+
+.user-made > i {
+  color: #F9A825 !important;
+}
 /*# sourceMappingURL=chat-styles.css.map */

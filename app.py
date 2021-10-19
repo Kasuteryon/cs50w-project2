@@ -19,7 +19,16 @@ FLASK_APP = os.getenv("FLASK_APP")
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+
+    li = []
+    with open('./users.json', "r") as file:
+            data = json.load(file)
+
+    for channel in data['channels']:
+        li.append(channel)
+    
+
+    return render_template("index.html", li=li)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():

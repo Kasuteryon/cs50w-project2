@@ -16,6 +16,7 @@
   padding: 6px 14px;
   z-index: 99;
   transition: all 0.5s ease;
+  z-index: 20000000;
 }
 .sidebar.open{
   width: 250px;
@@ -247,8 +248,17 @@ ol, ul{
   font-weight: 500;
   margin: 18px
 }
-@media (max-width: 420px) {
+
+@media (max-width: 550px) {
   .sidebar li .tooltip{
     display: none;
   }
+
+  .sidebar.open{
+    width: 100%;
+  }
+}
+
+.modal{
+  z-index: 700000000 !important;
 }
