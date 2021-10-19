@@ -45,6 +45,13 @@ body {
   color: #fff;
 }
 
+.btn-success {
+  background-color: none !important;
+  border: none;
+  background: -webkit-gradient(linear, left top, right top, from(#FF6633), to(#FF9933)) !important;
+  background: linear-gradient(to right, #FF6633, #FF9933) !important;
+}
+
 /*#tasks { list-style-type: none; margin: 0; padding: 0; }
 #tasks > li { padding: 0.5rem 1rem; }
 #tasks > li:nth-child(odd) { background: #efefef; } */

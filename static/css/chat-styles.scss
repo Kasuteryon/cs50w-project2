@@ -41,6 +41,11 @@ body {
     color: #fff; 
 }
 
+.btn-success{
+    background-color: none !important;
+    border: none;
+    background: $gradient-orange !important; 
+}
 /*#tasks { list-style-type: none; margin: 0; padding: 0; }
 #tasks > li { padding: 0.5rem 1rem; }
 #tasks > li:nth-child(odd) { background: #efefef; } */

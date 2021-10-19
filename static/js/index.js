@@ -129,3 +129,36 @@ function logOut(){
     localStorage.removeItem('actualUser');
 }
 
+function addChannel(){
+    //console.log("HOLA");
+    channels = document.getElementById('nav-list');
+    input = document.getElementById('channel');
+
+    if (input.value){
+        li = document.createElement('li');
+        a = document.createElement('a');
+        i = document.createElement('i');
+        span1 = document.createElement('span');
+        span2 = document.createElement('span');
+
+        //<i class='bx bx-group'></i>
+        i.classList.add('bx');
+        i.classList.add('bx-group');
+
+        span1.classList.add('links_name');
+        span1.innerHTML = input.value;
+
+        a.append(i, span1);
+
+        span2.classList.add('tooltip');
+
+        li.append(a, span2);
+
+        channels.append(li);
+
+        input.value = "";
+    }
+
+}
+
+document.getElementById('newChannel').addEventListener('click', addChannel);

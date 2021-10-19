@@ -13,7 +13,7 @@ app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
-socketio = SocketIO(app, manage_session=False)
+socketio = SocketIO(app, cors_allowed_origins="*")
 
 FLASK_APP = os.getenv("FLASK_APP")
 
