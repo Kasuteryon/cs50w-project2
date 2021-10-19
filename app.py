@@ -7,6 +7,7 @@ from werkzeug.utils import redirect
 import json
 
 users = []
+actualUser = None;
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
@@ -20,13 +21,13 @@ FLASK_APP = os.getenv("FLASK_APP")
 @app.route("/")
 def index():
 
+    
     li = []
     with open('./users.json', "r") as file:
-            data = json.load(file)
+        data = json.load(file)
 
     for channel in data['channels']:
         li.append(channel)
-    
 
     return render_template("index.html", li=li)
 
@@ -42,8 +43,8 @@ def login():
 
         for userF in data['users']:
             if userF["username"] == user and userF["password"] == pas:
+                actualUser = user
                 return redirect("/")
-              
 
     return render_template("login.html")
 

@@ -27,15 +27,15 @@
          <span class="tooltip">Search</span>
       </li>
       <li>
-        <a href="#">
-          <i class='bx bx-home-alt' ></i>
+        <a href="#" onclick="joinRoom('general');">
+          <i class='bx bx-home-alt'></i>
           <span class="links_name">General</span>
         </a>
          <span class="tooltip">General</span>
       </li>
       {% for channel in li %}
       <li>
-        <a href="#" class="user-made">
+        <a href="#" class="user-made" onclick="joinRoom('{{channel.name}}');">
           <i class='bx bx-group'></i>
           <span class="links_name">{{channel.name}}</span>
         </a>
@@ -67,18 +67,20 @@
         <h5 class="modal-title" id="staticBackdropLabel">Agregar Nuevo Canal</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <form action="POST">
-          <div class="mb-3">
-            <label name="channel" class="col-form-label">Nombre Canal:</label>
-            <input type="text" id="channel" class="form-control">
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar <i class='bx bxs-x-circle'></i></button>
-        <button type="button" class="btn btn-success" id="newChannel">Agregar <i class='bx bx-plus-circle' ></i></button>
-      </div>
+      <form method="POST">
+        <div class="modal-body">
+          
+            <div class="mb-3">
+              <label class="col-form-label">Nombre Canal:</label>
+              <input type="text" id="channel" name="channel" class="form-control">
+            </div>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar <i class='bx bxs-x-circle'></i></button>
+          <button type="button" class="btn btn-success" id="newChannel">Agregar <i class='bx bx-plus-circle' ></i></button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
