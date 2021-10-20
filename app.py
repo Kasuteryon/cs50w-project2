@@ -1,13 +1,13 @@
 import os
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
 from flask_session import Session
 from flask_socketio import SocketIO, emit, send, join_room, leave_room
 from werkzeug.utils import redirect
 import json
 
 users = []
-actualUser = None;
+messages = {"general":[]}
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
@@ -18,18 +18,48 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 
 FLASK_APP = os.getenv("FLASK_APP")
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def index():
 
-    
-    li = []
-    with open('./users.json', "r") as file:
-        data = json.load(file)
+    if request.method == "GET":
+        li = []
+        with open('./users.json', "r") as file:
+            data = json.load(file)
 
-    for channel in data['channels']:
-        li.append(channel)
+        for channel in data['channels']:
+            li.append(channel)
 
-    return render_template("index.html", li=li)
+        
+        return render_template("index.html", li=li) 
+    else:
+        canal = request.form.get("channel")
+
+        print("-------------------------")    
+        print(canal)   
+        print("-------------------------")  
+        
+        with open('./users.json', "r") as file:
+            data = json.load(file)
+
+        names = []
+        for chan in data['channels']:
+            names.append(chan['name'])
+
+        if canal in names:
+            return "Nombre de canal usado", 403
+
+        else:
+            newChannel = {
+                "name": canal,
+                "createdBy": session.get("user_id")
+            }
+
+            data['channels'].append(newChannel)
+
+            with open('./users.json', "w") as file:
+                json.dump(data, file)
+
+    return render_template("index.html")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -43,7 +73,7 @@ def login():
 
         for userF in data['users']:
             if userF["username"] == user and userF["password"] == pas:
-                actualUser = user
+                session["user_id"] = user
                 return redirect("/")
 
     return render_template("login.html")

@@ -84,8 +84,8 @@ function actualUser(){
     actualUser = document.getElementById('loguser').value;
     localStorage.setItem('actualUser', actualUser);
     localStorage.setItem('room', 'general');
-    /* Form
-    let form = new FormData();
+     //Form
+    /*let form = new FormData();
 
     form.append('user', usuario);
     // Objeto tequest
@@ -133,12 +133,11 @@ function logOut(){
     localStorage.removeItem('actualUser');
 }
 
-function addChannel(){
+function addChannel(value){
     //console.log("HOLA");
     channels = document.getElementById('nav-list');
-    input = document.getElementById('channel');
 
-    if (input.value){
+    if (value){
         li = document.createElement('li');
         a = document.createElement('a');
         i = document.createElement('i');
@@ -150,20 +149,60 @@ function addChannel(){
         i.classList.add('bx-group');
 
         span1.classList.add('links_name');
-        span1.innerHTML = input.value;
+        span1.innerHTML = value;
 
         a.append(i, span1);
 
         span2.classList.add('tooltip');
-        span2.innerHTML = input.value;
+        span2.innerHTML = value;
 
         li.append(a, span2);
 
         channels.append(li);
 
-        input.value = "";
     }
 
 }
 
-document.getElementById('newChannel').addEventListener('click', addChannel);
+//document.getElementById('newChannel').addEventListener('click', addChannel);
+
+function newCanal(){
+    let nuevoCanal = document.getElementById('channel');
+
+    if (!nuevoCanal.value){
+        return false;
+    }
+
+    let nuevo = nuevoCanal.value;
+    nuevoCanal.value = "";
+
+    let form = new FormData();
+    // Objeto tequest
+    let request = new XMLHttpRequest();
+
+    request.open("POST", "/");
+
+    // Primer parametro el que recibe python, el segundo guardado en js
+    form.append('channel', nuevo);
+
+    request.send(form);
+
+    request.onreadystatechange = function(){
+        if (request.readyState == 4){
+            // Cuando el servidor responde
+            let codigoRespuesta = request.status;
+
+            if (codigoRespuesta == 200){
+                let info = request.responseText;
+                addChannel(nuevo);
+
+                return false;
+            }else{
+                let info = request.responseText;
+                alert(info)
+                return false;
+            }
+        }
+    }
+
+}
