@@ -135,7 +135,7 @@ function logOut(){
 
 function addChannel(value){
     //console.log("HOLA");
-    channels = document.getElementById('nav-list');
+    channels = document.getElementById('nav-chan');
 
     if (value){
         li = document.createElement('li');
@@ -151,12 +151,18 @@ function addChannel(value){
         span1.classList.add('links_name');
         span1.innerHTML = value;
 
+        a.classList.add('user-made');
         a.append(i, span1);
 
         span2.classList.add('tooltip');
         span2.innerHTML = value;
 
         li.append(a, span2);
+
+
+        a.addEventListener('click', () => {
+            joinRoom(value);
+        });
 
         channels.append(li);
 
@@ -205,4 +211,17 @@ function newCanal(){
         }
     }
 
+}
+
+function GetChannel(){
+    let form = new FormData();
+    // Objeto tequest
+    let request = new XMLHttpRequest();
+
+    request.open("GET", "/");
+
+    // Primer parametro el que recibe python, el segundo guardado en js
+    form.append('channel', nuevo);
+
+    request.send(form);
 }

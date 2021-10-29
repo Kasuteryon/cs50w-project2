@@ -115,8 +115,11 @@ def send_message(data):
     dateM = data["dateM"]
     user = data["user"]
     roomM = data["roomM"]
+    dicto = {"user":user,"selection": selection, "dateM": dateM}
     # print(selection)
-    emit("announce message", {"user":user,"selection": selection, "dateM": dateM}, room=roomM)
+    messages[data["roomM"]].append(dicto)
+    print(messages["general"])
+    emit("announce message", dicto, room=roomM)
 
 @socketio.on('join')
 def on_join(data):
