@@ -124,7 +124,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
     if (localStorage.getItem('actualUser') === null){
         window.location.replace("/login");
     }
+
     joinRoom(localStorage.getItem('room'));
+    
     userSpan = document.getElementById('userSpan');
     userSpan.innerHTML = 'Soy ' + localStorage.getItem('actualUser')
 });
@@ -138,13 +140,14 @@ function addChannel(value){
     channels = document.getElementById('nav-chan');
 
     if (value){
+        
         li = document.createElement('li');
         a = document.createElement('a');
         i = document.createElement('i');
         span1 = document.createElement('span');
         span2 = document.createElement('span');
 
-        //<i class='bx bx-group'></i>
+            //<i class='bx bx-group'></i>
         i.classList.add('bx');
         i.classList.add('bx-group');
 
@@ -164,11 +167,15 @@ function addChannel(value){
             joinRoom(value);
         });
 
+        
         channels.append(li);
-
+        
+        
+        
     }
 
 }
+
 
 //document.getElementById('newChannel').addEventListener('click', addChannel);
 
@@ -200,7 +207,11 @@ function newCanal(){
 
             if (codigoRespuesta == 200){
                 let info = request.responseText;
-                addChannel(nuevo);
+                //addChannel(nuevo);
+                socket.on('announce channel', function(canal){
+                    addChannel(canal.nuevo);
+                });
+                
 
                 return false;
             }else{
@@ -210,6 +221,8 @@ function newCanal(){
             }
         }
     }
+
+    
 
 }
 

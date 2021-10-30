@@ -28,27 +28,28 @@ def index():
 
         for channel in data['channels']:
             li.append(channel)
-
+            messages[channel['name']] = []
         
+        print("------------------")
+        print(messages)
+
         return render_template("index.html", li=li) 
     else:
         canal = request.form.get("channel")
-
-        print("-------------------------")    
-        print(canal)   
-        print("-------------------------")  
         
         with open('./users.json', "r") as file:
             data = json.load(file)
 
         names = []
+
         for chan in data['channels']:
             names.append(chan['name'])
-
+            
         if canal in names:
             return "Nombre de canal usado", 403
 
         else:
+            session["actualChannel"] = canal
             newChannel = {
                 "name": canal,
                 "createdBy": session.get("user_id")
@@ -117,9 +118,21 @@ def send_message(data):
     roomM = data["roomM"]
     dicto = {"user":user,"selection": selection, "dateM": dateM}
     # print(selection)
-    messages[data["roomM"]].append(dicto)
-    print(messages["general"])
+    if len(messages[data["roomM"]]) >= 100:
+        messages[data["roomM"]].pop(0)
+        messages[data["roomM"]].append(dicto)
+    else:
+        messages[data["roomM"]].append(dicto)
+
+    print(messages)
     emit("announce message", dicto, room=roomM)
+
+@socketio.on("channel")
+def send_channel(canal):
+    #nombre = data["nombre"]
+    canal = session["actualChannel"]
+    emit("announce channel",canal, broadcast=True)
+
 
 @socketio.on('join')
 def on_join(data):
