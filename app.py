@@ -6,9 +6,6 @@ from flask_socketio import SocketIO, emit, send, join_room, leave_room
 from werkzeug.utils import redirect
 import json
 
-users = []
-messages = {"general":[]}
-
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 app.config['SESSION_TYPE'] = 'filesystem'
@@ -17,6 +14,14 @@ Session(app)
 socketio = SocketIO(app, cors_allowed_origins="*")
 
 FLASK_APP = os.getenv("FLASK_APP")
+
+users = []
+messages = {"General":[]}
+with open('./users.json', "r") as file:
+            data = json.load(file)
+
+for channel in data['channels']:
+    messages[channel['name']] = []
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -28,7 +33,6 @@ def index():
 
         for channel in data['channels']:
             li.append(channel)
-            messages[channel['name']] = []
         
         print("------------------")
         print(messages)
@@ -49,7 +53,7 @@ def index():
             return "Nombre de canal usado", 403
 
         else:
-            session["actualChannel"] = canal
+            #session["actualChannel"] = canal
             newChannel = {
                 "name": canal,
                 "createdBy": session.get("user_id")
@@ -110,13 +114,13 @@ def register():
 
     return render_template("login.html")
 
-@socketio.on("message")
+@socketio.on("announce message")
 def send_message(data):
     selection = data["selection"]
     dateM = data["dateM"]
     user = data["user"]
     roomM = data["roomM"]
-    dicto = {"user":user,"selection": selection, "dateM": dateM}
+    dicto = {"user":user,"selection": selection, "dateM": dateM, "roomM":roomM}
     # print(selection)
     
     if len(messages[data["roomM"]]) >= 100:
@@ -134,20 +138,13 @@ def printMessages():
         "channels": messages
     })
 
-
-@socketio.on("channel")
-def send_channel(canal):
-    #nombre = data["nombre"]
-    canal = session["actualChannel"]
-    emit("announce channel",canal, broadcast=True)
-
-
 @socketio.on('join')
 def on_join(data):
     username = data['username']
     room = data['room']
+    dicto = {"username": username, "room": room}
     join_room(room)
-    send(username + ' has entered the room.', to=room)
+    #emit(dicto, to=room)
 
 @socketio.on('leave')
 def on_leave(data):

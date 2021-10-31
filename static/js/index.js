@@ -11,9 +11,8 @@ function sendMessage(){
     
     let dict =  {'user':user,'selection': task.value, 'dateM': fecha.toString(), 'roomM': localStorage.getItem('room')};
     
-    
     if (task.value) {
-        socket.emit("message", dict);
+        socket.emit("announce message", dict);
         task.value = '';
     }
 
@@ -21,9 +20,15 @@ function sendMessage(){
     return false;
     
 }
+let i = 0
 
 socket.on('announce message', data => {
-    printMessages(data);
+
+    if (data.roomM === localStorage.getItem('room')){
+        printMessages(data);
+        i = i + 1
+        console.log(i)
+    }
 }); 
 
 
@@ -78,16 +83,22 @@ function printMessages(data){
 }
 
 function joinRoom(data){
-    localStorage.setItem("room", data);
-    printSaved();
     socket.emit("join", {'username': localStorage.getItem('actualUser'), 'room':data})
+    localStorage.setItem("room", data);
+    
+    channelSpan = document.getElementById('channelSpan');
+    channelSpan.innerHTML = data + ` <i class='bx bx-home bx-tada' ></i>`;
+
+    printSaved();
+
+    
     //socket.emit('messages', data);
 }
 
 function actualUser(){
     actualUser = document.getElementById('loguser').value;
     localStorage.setItem('actualUser', actualUser);
-    localStorage.setItem('room', 'general');
+    localStorage.setItem('room', 'General');
 
 }
 
@@ -99,7 +110,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
     joinRoom(localStorage.getItem('room'));
     
     userSpan = document.getElementById('userSpan');
-    userSpan.innerHTML = 'Soy ' + localStorage.getItem('actualUser')
+    channelSpan = document.getElementById('channelSpan');
+
+    userSpan.innerHTML = 'Soy ' + localStorage.getItem('actualUser');
+    channelSpan.innerHTML = localStorage.getItem('room') + ` <i class='bx bx-home bx-tada' ></i>`;
 
 });
 
@@ -180,11 +194,7 @@ function newCanal(){
             if (codigoRespuesta == 200){
                 let info = request.responseText;
                 //addChannel(nuevo);
-                socket.on('announce channel', function(canal){
-                    addChannel(canal.nuevo);
-                    
-                });
-                
+                addChannel(canal.nuevo);
 
                 return false;
             }else{
@@ -209,6 +219,10 @@ function printSaved(){
     request.onload = () => {
         let data = JSON.parse(request.responseText);
         let lista = data["channels"][localStorage.getItem("room")];
+
+        let ul = document.getElementById("tasks");
+        while(ul.firstChild) ul.removeChild(ul.firstChild);
+
 
         for (let i = 0; i < lista.length; i++){
             printMessages(lista[i])
