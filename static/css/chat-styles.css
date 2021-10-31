@@ -52,6 +52,22 @@ body {
   background: linear-gradient(to right, #FF6633, #FF9933) !important;
 }
 
+.img {
+  border: double !important;
+  border-radius: 20px;
+  -webkit-transition: ease 1s !important;
+  transition: ease 1s !important;
+}
+
+.img:hover {
+  -webkit-transition: ease 1s !important;
+  transition: ease 1s !important;
+  border: double !important;
+  background: -webkit-gradient(linear, left top, right top, from(#FF6633), to(#FF9933)) !important;
+  background: linear-gradient(to right, #FF6633, #FF9933) !important;
+  color: white;
+}
+
 /*#tasks { list-style-type: none; margin: 0; padding: 0; }
 #tasks > li { padding: 0.5rem 1rem; }
 #tasks > li:nth-child(odd) { background: #efefef; } */
@@ -78,5 +94,9 @@ body {
 
 .user-made > i {
   color: #F9A825 !important;
+}
+
+.modal-backdrop {
+  z-index: 0 !important;
 }
 /*# sourceMappingURL=chat-styles.css.map */

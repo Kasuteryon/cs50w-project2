@@ -9,8 +9,14 @@ function sendMessage(){
     //console.log(fecha.toString());
     var user = localStorage.getItem('actualUser');
     
-    let dict =  {'user':user,'selection': task.value, 'dateM': fecha.toString(), 'roomM': localStorage.getItem('room')};
-    
+    let dict;
+
+    if (task.value.endsWith(".jpg") || task.value.endsWith(".jpeg") || task.value.endsWith(".png") || task.value.endsWith(".gif")){
+        dict =  {'user':user,'selection': task.value, 'dateM': fecha.toString(), 'roomM': localStorage.getItem('room'), 'isImg': 1};
+    }else{
+        dict =  {'user':user,'selection': task.value, 'dateM': fecha.toString(), 'roomM': localStorage.getItem('room'), 'isImg': 0};
+    }
+
     if (task.value) {
         socket.emit("announce message", dict);
         task.value = '';
@@ -54,7 +60,13 @@ function printMessages(data){
 
     hora.innerHTML = `Hora: ${data.dateM}`;
     user.innerHTML = `Por: ${data.user}`;
-    message.innerHTML = `${data.selection}`;
+
+    if (data.isImg === 1){
+        message.innerHTML = `<img class="card-img-top" src="${data.selection}"></img>`
+    }else{
+       message.innerHTML = `${data.selection}`; 
+    }
+    
 
     row.classList.add('row');
     colOwn.classList.add('col-lg-6');

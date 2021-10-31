@@ -46,6 +46,18 @@ body {
     border: none;
     background: $gradient-orange !important; 
 }
+
+.img{
+    border: double !important;
+    border-radius: 20px;
+    transition: ease 1s !important;
+}
+.img:hover{
+    transition: ease 1s !important;
+    border: double !important;
+    background: $gradient-orange !important;
+    color: white;
+}
 /*#tasks { list-style-type: none; margin: 0; padding: 0; }
 #tasks > li { padding: 0.5rem 1rem; }
 #tasks > li:nth-child(odd) { background: #efefef; } */
@@ -73,4 +85,8 @@ body {
 
 .user-made > i{
     color:#F9A825 !important;
+}
+
+.modal-backdrop{
+    z-index: 0 !important;
 }

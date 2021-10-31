@@ -120,7 +120,8 @@ def send_message(data):
     dateM = data["dateM"]
     user = data["user"]
     roomM = data["roomM"]
-    dicto = {"user":user,"selection": selection, "dateM": dateM, "roomM":roomM}
+    isImg = data["isImg"]
+    dicto = {"user":user,"selection": selection, "dateM": dateM, "roomM":roomM, "isImg": isImg}
     # print(selection)
     
     if len(messages[data["roomM"]]) >= 100:
