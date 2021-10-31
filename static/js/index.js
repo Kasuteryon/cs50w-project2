@@ -26,6 +26,8 @@ socket.on('announce message', data => {
     printMessages(data);
 }); 
 
+
+
 function printMessages(data){
     const li = document.createElement('div');
     const row = document.createElement('div');
@@ -77,46 +79,15 @@ function printMessages(data){
 
 function joinRoom(data){
     localStorage.setItem("room", data);
+    printSaved();
     socket.emit("join", {'username': localStorage.getItem('actualUser'), 'room':data})
+    //socket.emit('messages', data);
 }
 
 function actualUser(){
     actualUser = document.getElementById('loguser').value;
     localStorage.setItem('actualUser', actualUser);
     localStorage.setItem('room', 'general');
-     //Form
-    /*let form = new FormData();
-
-    form.append('user', usuario);
-    // Objeto tequest
-    let request = new XMLHttpRequest();
-
-    request.open("POST", "/login");
-
-    // Enviar datos
-    request.send(form);
-
-    // ---------------
-    request.onreadystatechange = function(){
-        if (request.readyState == 4){
-            // Cuando el servidor responde
-            let codigoRespuesta = request.status;
-            if (codigoRespuesta == 200){
-                let info = request.responseText;
-                alert(info);
-
-                localStorage.setItem('actualUser', actualUser);
-                localStorage.setItem('room', 'general');
-
-                window.location = "/";
-            }else{
-                let info = request.responseText;
-                alert(info);
-                return false;
-            }
-        }
-    }*/
-    
 
 }
 
@@ -129,6 +100,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     
     userSpan = document.getElementById('userSpan');
     userSpan.innerHTML = 'Soy ' + localStorage.getItem('actualUser')
+
 });
 
 function logOut(){
@@ -210,6 +182,7 @@ function newCanal(){
                 //addChannel(nuevo);
                 socket.on('announce channel', function(canal){
                     addChannel(canal.nuevo);
+                    
                 });
                 
 
@@ -226,15 +199,22 @@ function newCanal(){
 
 }
 
-function GetChannel(){
-    let form = new FormData();
+function printSaved(){
     // Objeto tequest
     let request = new XMLHttpRequest();
 
-    request.open("GET", "/");
+    request.open("POST", "/printMessages");
 
     // Primer parametro el que recibe python, el segundo guardado en js
-    form.append('channel', nuevo);
+    request.onload = () => {
+        let data = JSON.parse(request.responseText);
+        let lista = data["channels"][localStorage.getItem("room")];
 
-    request.send(form);
+        for (let i = 0; i < lista.length; i++){
+            printMessages(lista[i])
+        }
+        
+    }
+
+    request.send();
 }

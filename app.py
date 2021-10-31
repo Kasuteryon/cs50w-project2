@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, jsonify
 from flask_session import Session
 from flask_socketio import SocketIO, emit, send, join_room, leave_room
 from werkzeug.utils import redirect
@@ -118,14 +118,22 @@ def send_message(data):
     roomM = data["roomM"]
     dicto = {"user":user,"selection": selection, "dateM": dateM}
     # print(selection)
+    
     if len(messages[data["roomM"]]) >= 100:
         messages[data["roomM"]].pop(0)
         messages[data["roomM"]].append(dicto)
     else:
         messages[data["roomM"]].append(dicto)
 
-    print(messages)
     emit("announce message", dicto, room=roomM)
+
+@app.route("/printMessages", methods = ["GET", "POST"])
+def printMessages():
+
+    return jsonify({
+        "channels": messages
+    })
+
 
 @socketio.on("channel")
 def send_channel(canal):
