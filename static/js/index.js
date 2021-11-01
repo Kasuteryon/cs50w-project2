@@ -1,3 +1,4 @@
+
 var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
 
 function sendMessage(){
@@ -13,6 +14,8 @@ function sendMessage(){
 
     if (task.value.endsWith(".jpg") || task.value.endsWith(".jpeg") || task.value.endsWith(".png") || task.value.endsWith(".gif")){
         dict =  {'user':user,'selection': task.value, 'dateM': fecha.toString(), 'roomM': localStorage.getItem('room'), 'isImg': 1};
+    }else if (task.value.startsWith("*") && task.value.endsWith("*")){
+        dict =  {'user':user,'selection': task.value, 'dateM': fecha.toString(), 'roomM': localStorage.getItem('room'), 'isImg': 2};
     }else{
         dict =  {'user':user,'selection': task.value, 'dateM': fecha.toString(), 'roomM': localStorage.getItem('room'), 'isImg': 0};
     }
@@ -63,6 +66,9 @@ function printMessages(data){
 
     if (data.isImg === 1){
         message.innerHTML = `<img class="card-img-top" src="${data.selection}"></img>`
+    }else if (data.isImg === 2){
+        const men = data.selection.slice(1, -1);
+        message.innerHTML = `<h1>${men}</h1>`
     }else{
        message.innerHTML = `${data.selection}`; 
     }
@@ -95,6 +101,7 @@ function printMessages(data){
 }
 
 function joinRoom(data){
+    socket.emit("leave", {'username': localStorage.getItem('actualUser'), 'room':localStorage.getItem('room')})
     socket.emit("join", {'username': localStorage.getItem('actualUser'), 'room':data})
     localStorage.setItem("room", data);
     
@@ -175,12 +182,48 @@ function addChannel(value){
 }
 
 
+let canalesListados;
+function cargarCanal(data){
+    canalesListados = data;
+}
 //document.getElementById('newChannel').addEventListener('click', addChannel);
+function canalExiste(nuevoCanal){
+
+    let li = Object.keys(canalesListados["channels"]);
+
+    for (let i = 0; i < li.length; i++){
+        console.log(li[i]);
+
+        if (nuevoCanal === li[i]){
+            return true;
+        }else{
+            return false;
+        }
+    }
+}
+
 
 function newCanal(){
     let nuevoCanal = document.getElementById('channel');
 
     if (!nuevoCanal.value){
+        return false;
+    }
+    
+    if (canalExiste(nuevoCanal) == false){
+        nuevoCanal.value = "";
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            text: "Canal Existente",
+            showConfirmButton: true,
+            //timer: 5000,
+            backdrop: `
+            url("../static/images/nyan-cat.gif")
+            left top
+            no-repeat`
+        });
+
         return false;
     }
 
@@ -206,7 +249,7 @@ function newCanal(){
             if (codigoRespuesta == 200){
                 let info = request.responseText;
                 //addChannel(nuevo);
-                addChannel(canal.nuevo);
+                addChannel(nuevo);
 
                 return false;
             }else{
@@ -232,6 +275,8 @@ function printSaved(){
         let data = JSON.parse(request.responseText);
         let lista = data["channels"][localStorage.getItem("room")];
 
+        cargarCanal(data);
+
         let ul = document.getElementById("tasks");
         while(ul.firstChild) ul.removeChild(ul.firstChild);
 
@@ -243,4 +288,5 @@ function printSaved(){
     }
 
     request.send();
+    
 }

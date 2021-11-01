@@ -329,7 +329,11 @@ ol, ul {
 }
 
 .modal {
-  z-index: 700000000 !important;
+  z-index: 100000000 !important;
+}
+
+.swal2-container {
+  z-index: 1000000000 !important;
 }
 
 @media (max-height: 650px) {

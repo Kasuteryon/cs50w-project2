@@ -26,6 +26,8 @@ for channel in data['channels']:
 @app.route("/", methods=["GET", "POST"])
 def index():
 
+    errorChannel = None
+
     if request.method == "GET":
         li = []
         with open('./users.json', "r") as file:
@@ -50,7 +52,8 @@ def index():
             names.append(chan['name'])
             
         if canal in names:
-            return "Nombre de canal usado", 403
+            errorChannel = True
+            return render_template("index.html", errorChannel=errorChannel)
 
         else:
             #session["actualChannel"] = canal
@@ -145,12 +148,14 @@ def on_join(data):
     room = data['room']
     dicto = {"username": username, "room": room}
     join_room(room)
-    #emit(dicto, to=room)
+    emit(dicto, to=room)
 
 @socketio.on('leave')
 def on_leave(data):
     username = data['username']
     room = data['room']
+    
+    dicto = {"username": username, "room": room}
     leave_room(room)
-    send(username + ' has left the room.', to=room)
+    emit(dicto, to=room)
 
