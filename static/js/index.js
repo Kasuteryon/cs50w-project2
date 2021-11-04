@@ -172,15 +172,14 @@ function addChannel(value){
             joinRoom(value);
         });
 
-        
         channels.append(li);
-        
-        
         
     }
 
 }
-
+socket.on("announce channel", data => {
+    addChannel(data.name);
+});
 
 let canalesListados;
 function cargarCanal(data){
@@ -190,16 +189,20 @@ function cargarCanal(data){
 function canalExiste(nuevoCanal){
 
     let li = Object.keys(canalesListados["channels"]);
-
+    var ban;
     for (let i = 0; i < li.length; i++){
         console.log(li[i]);
 
         if (nuevoCanal === li[i]){
-            return true;
+            ban = true;
+            break;
         }else{
-            return false;
+            ban = false;
         }
     }
+
+    console.log(ban);
+    return ban;
 }
 
 
@@ -209,8 +212,8 @@ function newCanal(){
     if (!nuevoCanal.value){
         return false;
     }
-    
-    if (canalExiste(nuevoCanal) == false){
+    //console.log(canalExiste(nuevoCanal.value));
+    if (canalExiste(nuevoCanal.value)){
         nuevoCanal.value = "";
         Swal.fire({
             position: 'center',
@@ -240,7 +243,7 @@ function newCanal(){
     form.append('channel', nuevo);
 
     request.send(form);
-
+    
     request.onreadystatechange = function(){
         if (request.readyState == 4){
             // Cuando el servidor responde
@@ -249,7 +252,9 @@ function newCanal(){
             if (codigoRespuesta == 200){
                 let info = request.responseText;
                 //addChannel(nuevo);
-                addChannel(nuevo);
+                socket.emit("announce channel", {'name': nuevo});
+                //addChannel(nuevo)
+                
 
                 return false;
             }else{

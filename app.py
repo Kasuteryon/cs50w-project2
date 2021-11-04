@@ -135,6 +135,12 @@ def send_message(data):
 
     emit("announce message", dicto, room=roomM)
 
+@socketio.on("announce channel")
+def channel_added(data):
+    name = data["name"]
+
+    emit("announce channel", {"name": name},broadcast=True)
+
 @app.route("/printMessages", methods = ["GET", "POST"])
 def printMessages():
 

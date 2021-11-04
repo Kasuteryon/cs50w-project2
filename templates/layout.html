@@ -36,8 +36,9 @@
         </a>
          <span class="tooltip">General</span>
       </li>
-      {% for channel in li %}
+      
       <div id="nav-chan">
+        {% for channel in li %}
         <li>
           <a href="#" class="user-made" onclick="joinRoom('{{channel.name}}');">
             <i class='bx bx-group'></i>
@@ -45,8 +46,9 @@
           </a>
            <span class="tooltip">{{channel.name}}</span>
         </li>
+        {% endfor %}
       </div>
-      {% endfor %}
+      
       <li>
        <a href="#" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
         <i class='bx bx-plus-circle' ></i>
