@@ -70,7 +70,7 @@ function printMessages(data){
         const men = data.selection.slice(1, -1);
         message.innerHTML = `<h1>${men}</h1>`
     }else{
-       message.innerHTML = `${data.selection}`; 
+       message.innerText = `${data.selection}`; 
     }
     
 
@@ -97,6 +97,7 @@ function printMessages(data){
         row.append(colOwn);
         colOther.append(li);
     }
+    
     window.scrollTo(0, document.body.scrollHeight);
 }
 
@@ -181,19 +182,25 @@ socket.on("announce channel", data => {
     addChannel(data.name);
 });
 
-let canalesListados;
-function cargarCanal(data){
-    canalesListados = data;
-}
 //document.getElementById('newChannel').addEventListener('click', addChannel);
 function canalExiste(nuevoCanal){
 
-    let li = Object.keys(canalesListados["channels"]);
-    var ban;
-    for (let i = 0; i < li.length; i++){
-        console.log(li[i]);
+    let canalesListados = [];
 
-        if (nuevoCanal === li[i]){
+    let elements = document.getElementById('nav-chan');
+    //console.log(elements.children[0].children[1].innerText);
+    //console.log(elements.children.length);
+
+    for (let i = 0; i < elements.children.length; i++){
+        //console.log(elements.children[i].children[1].innerText);
+        canalesListados.push(elements.children[i].children[1].innerText);
+    }
+    
+    var ban;
+    for (let i = 0; i < canalesListados.length; i++){
+        console.log(canalesListados[i]);
+
+        if (nuevoCanal === canalesListados[i]){
             ban = true;
             break;
         }else{
@@ -201,7 +208,7 @@ function canalExiste(nuevoCanal){
         }
     }
 
-    console.log(ban);
+    //console.log(ban);
     return ban;
 }
 
@@ -279,8 +286,6 @@ function printSaved(){
     request.onload = () => {
         let data = JSON.parse(request.responseText);
         let lista = data["channels"][localStorage.getItem("room")];
-
-        cargarCanal(data);
 
         let ul = document.getElementById("tasks");
         while(ul.firstChild) ul.removeChild(ul.firstChild);

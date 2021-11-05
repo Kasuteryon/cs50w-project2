@@ -4,34 +4,34 @@ body {
 }
 
 #new-task {
-  background: rgba(0, 0, 0, 0.15);
+  background: rgba(0, 0, 0, 0.15) !important;
   padding: 0.25rem;
-  position: fixed;
-  bottom: 0;
+  position: fixed !important;
+  bottom: 0 !important;
   left: 4.9rem;
-  right: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  height: 3rem;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
+  right: 0 !important;
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  height: 3rem !important;
+  -webkit-box-sizing: border-box !important;
+          box-sizing: border-box !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+          backdrop-filter: blur(10px) !important;
 }
 
 #task {
-  border: none;
-  padding: 0 1rem;
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  border-radius: 2rem;
-  margin: 0.25rem;
+  border: none !important;
+  padding: 0 1rem !important;
+  -webkit-box-flex: 1 !important;
+      -ms-flex-positive: 1 !important;
+          flex-grow: 1 !important;
+  border-radius: 2rem !important;
+  margin: 0.25rem !important;
 }
 
 #task:focus {
-  outline: none;
+  outline: none !important;
 }
 
 #new-task > button {

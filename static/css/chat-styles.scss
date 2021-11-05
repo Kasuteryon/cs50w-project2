@@ -11,25 +11,25 @@ body {
     padding-bottom: 3rem; 
 }
 #new-task { 
-    background: rgba(0, 0, 0, 0.15); 
-    padding: 0.25rem; position: fixed; 
-    bottom: 0; 
+    background: rgba(0, 0, 0, 0.15) !important; 
+    padding: 0.25rem; position: fixed !important; 
+    bottom: 0 !important; 
     left: 4.9rem; 
-    right: 0; 
-    display: flex; 
-    height: 3rem; 
-    box-sizing: border-box; 
-    backdrop-filter: blur(10px); 
+    right: 0 !important; 
+    display: flex !important; 
+    height: 3rem !important; 
+    box-sizing: border-box !important; 
+    backdrop-filter: blur(10px) !important; 
 }
-#task { 
-    border: none; 
-    padding: 0 1rem; 
-    flex-grow: 1; 
-    border-radius: 2rem; 
-    margin: 0.25rem; 
+#task{ 
+    border: none !important; 
+    padding: 0 1rem !important; 
+    flex-grow: 1 !important; 
+    border-radius: 2rem !important; 
+    margin: 0.25rem !important; 
 }
 #task:focus 
-{ outline: none; 
+{ outline: none !important; 
 }
 #new-task > button { 
     background: $gradient-orange; 

@@ -17,11 +17,17 @@ FLASK_APP = os.getenv("FLASK_APP")
 
 users = []
 messages = {"General":[]}
+
+"""--------------------------------"""
+
 with open('./users.json', "r") as file:
             data = json.load(file)
 
 for channel in data['channels']:
     messages[channel['name']] = []
+
+"""--------------------------------"""
+
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -67,6 +73,8 @@ def index():
             with open('./users.json', "w") as file:
                 json.dump(data, file)
 
+            messages[canal] = []
+
     return render_template("index.html")
 
 @app.route("/login", methods=["GET", "POST"])
@@ -80,6 +88,7 @@ def login():
             data = json.load(file)
 
         for userF in data['users']:
+
             if userF["username"] == user and userF["password"] == pas:
                 session["user_id"] = user
                 return redirect("/")
@@ -112,6 +121,8 @@ def register():
 
             with open('./users.json', "w") as file:
                 json.dump(data, file)
+
+            
 
         return redirect("/login")
 
