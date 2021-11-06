@@ -51,7 +51,7 @@ Esto significa que para Iniciar Sesión debes de Registrarte, esto con el objeti
 
 En la barra lateral izquierda, en el ícono "New Channel +" 
 
-![Imagen](./static/images/Canal.png)
+![Imagen](./static/images/Canales.png)
 
 Podés agregar un canal identificandolo con un nombre.
 
@@ -78,6 +78,8 @@ La aplicación detecta quien envió el mensaje y los mensajes propios se imprime
 Solo se alamacenan del lado del servidor los últimos 100 mensajes por cada canal.
 
 Si un usuario no está en un canal mientras se envían otros mensajes por ahí siempre podrá ver los últimos 100 al regresar a ese canal.
+
+Se utiliza un solo HTML para el funcionamiento de los canales, al cambiar de canal, el reconoce a que canal se dirige, se desconecta del anterior, elimina en el HTML los mensajes anteriores, se conecta al nuevo e imprime los mensajes del canal elegido en caso que hayan.
 
 ![Imagen](./static/images/Mensajes.png)
 
