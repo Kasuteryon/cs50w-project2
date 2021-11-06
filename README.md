@@ -8,7 +8,13 @@ Bienvenido a mi Project2 de WEB50Xni: Flack, es una aplicación web construida e
 
 ### Nombre Visual
 
-Al Ingresar a la Aplicación por primera vez entrarás a una ventana de "Inicio de Sesión" y de "Registro de Usuario", esto significa que para Iniciar Sesión debes de Registrarte, esto con el objetivo de poder iniciar sesión en diferentes dispositivos(clientes).
+Al Ingresar a la Aplicación por primera vez entrarás a una ventana de "Inicio de Sesión" y de "Registro de Usuario". 
+
+![Imagen](./static/images/Login.png)
+
+Esto significa que para Iniciar Sesión debes de Registrarte, esto con el objetivo de poder iniciar sesión en diferentes dispositivos(clientes). Tu nombre visual estará junto al nombre del canal.
+
+![Imagen](./static/images/Nombre.png)
 
 
 #### Datos extra:
@@ -21,12 +27,20 @@ Al Ingresar a la Aplicación por primera vez entrarás a una ventana de "Inicio 
 ### Canales
 #### Creación de Canales, Lista de Canales y Recordar Canal
 
-En la barra lateral izquierda, en el ícono "New Channel +" podés agregar un canal identificandolo con un nombre.
+En la barra lateral izquierda, en el ícono "New Channel +" 
+
+![Imagen](./static/images/Canal.png)
+
+Podés agregar un canal identificandolo con un nombre.
+
+![Imagen](./static/images/ModalCanal.png)
 
 - Se valida que no se repitan los nombres de los canales existentes
 - Por medio del socket la creación del canal se hace en tiempo real para todos los usuarios
 - Los canales creados por el usuario tienen ícono de color amarillo
 - Cuando sales de la aplicación web SIN CERRAR SESIÓN cerrando la ventana o el navegador ésta recuerda el usuario ingresado al igual que el canal en el que estabas
+
+![Imagen](./static/images/ValidarCanal.png)
 
 ### Envío y Recepción de Mensajes
 
@@ -43,7 +57,25 @@ Solo se alamacenan del lado del servidor los últimos 100 mensajes por cada cana
 
 Si un usuario no está en un canal mientras se envían otros mensajes por ahí siempre podrá ver los últimos 100 al regresar a ese canal.
 
+![Imagen](./static/images/Mensajes.png)
+
 #### Toque Personal:
 - Imágenes y Gif a través de la dirección de imágenes que tengan pero solo las que terminen en ".jpg", ".jpeg", ".png" y ".gif". Las que tengan dirección de imagen con otros formatos y que estén cifrados se enviarán solo como texto.
 
-- Mensajes de mayor tamaño (de etiqueta H1 concretamente) al escribir el texto comenzando y terminándolo con asteriscos (*)
+![Imagen](./static/images/DireccionImagen.png)
+
+Se pegan en el chat:
+
+![Imagen](./static/images/InputImagen.png)
+
+Se ve así:
+
+![Imagen](./static/images/EvidenciaImagen.png)
+
+- Mensajes de mayor tamaño (de etiqueta H1 concretamente) al escribir el texto comenzando y terminándolo con asteriscos (*). Solo funciona cuando toda la cadena inicia y termina en asteriscos.
+
+![Imagen](./static/images/MensajeInput.png)
+
+Se ve así:
+
+![Imagen](./static/images/MensajeGrande.png)
