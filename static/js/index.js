@@ -53,16 +53,14 @@ function printMessages(data){
     hora.classList.add('card-header')
     const cuerpo = document.createElement('div');
     cuerpo.classList.add('card-body');
-    const user = document.createElement('h5');
-    user.classList.add('card-title');
+    
     const message = document.createElement('p');
     message.classList.add('card-text');
 
-    cuerpo.append(user, message);
+    cuerpo.append(message);
     li.append(hora, cuerpo);
 
-    hora.innerHTML = `Hora: ${data.dateM}`;
-    user.innerHTML = `Por: ${data.user}`;
+    hora.innerHTML = `<b>Por:</b> ${data.user} <b>Hora: </b>${data.dateM}`;
 
     if (data.isImg === 1){
         message.innerHTML = `<img class="card-img-top" src="${data.selection}"></img>`
