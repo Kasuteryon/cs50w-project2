@@ -6,6 +6,27 @@ Bienvenido a mi Project2 de WEB50Xni: Flack, es una aplicación web construida e
 
 ## Estructura - Funcionalidad - Descripción
 
+### Scripts
+
+Para le ejecución de éste proyecto únicamente se utilizan los siguientes scripts:
+
+#### Python:
+- app.py: Script python en flask donde se tiene la aplicación principal
+
+#### JavaScript:
+- index.js: Archivo JS donde se encuentra toda la lógica referente a la conexión con el socket y el envío de mensajes desde front-end
+
+#### HTML: 
+- Layout: HTML que renderiza la plantilla Index en su interior que contiene las referencias de todos los estilos CSS y Scripts JS
+- Login: HTML independiente para iniciar sesión
+- Index: HTML principal donde están las vistas de las funcionalidades estelares.
+
+#### SCSS:
+- chat-styles: Que contienen los estilos para los chats
+- login-styles: Que contienen los estilos para el login
+- nav-styles: Que contiene los estilos para la barra de navegación lateral
+
+
 ### Nombre Visual
 
 Al Ingresar a la Aplicación por primera vez entrarás a una ventana de "Inicio de Sesión" y de "Registro de Usuario". 
@@ -23,6 +44,7 @@ Esto significa que para Iniciar Sesión debes de Registrarte, esto con el objeti
 - Podés iniciar sesión de manera múltiple en diferentes dispositivos
 - Se valida si el usuario existe a la hora del registro
 - A nivel de código el usuario se guarda en back-end y localStorage
+- Si no has iniciado sesión y entras a la ruta "/" el JS te redirige al login
 
 ### Canales
 #### Creación de Canales, Lista de Canales y Recordar Canal
